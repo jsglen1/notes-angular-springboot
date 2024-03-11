@@ -1,0 +1,54 @@
+<div class="mt-24 flex items-center justify-center">
+  <form
+    [formGroup]="formLogin"
+    id="formLogin"
+    (ngSubmit)="onSubmit()"
+    class="flex flex-col items-center justify-center w-72 text-black space-y-4 p-5 rounded-md border-gray-600 border bg-gray-700"
+  >
+    <h1 class="text-xl text-slate-200">Iniciar Sección</h1>
+    <div class="flex flex-col w-full">
+      <label id="nameLabel" htmlFor="email" class="text-white">Nombre</label>
+      <input
+        id="email"
+        type="text"
+        name="email"
+        formControlName="email"
+        placeholder="nombre"
+        class="px-2 rounded-md border p-1"
+      />
+
+      @if (formLogin.get('email')?.invalid ) { @if (email?.errors?.['required'])
+      {
+      <span class="text-purple-500"> El nombre es requerido.</span>
+      } } @if (email?.errors?.['minlength']) {
+      <span class="text-purple-500"> Debe tener 4 letras como minimo.</span>}
+    </div>
+
+    <div class="flex flex-col w-full">
+      <label id="passwordLabel" htmlFor="email" class="text-white"
+        >Contraseña</label
+      >
+      <input
+        id="password"
+        type="password"
+        name="password"
+        formControlName="password"
+        placeholder="contraseña"
+        class="px-2 rounded-md border p-1"
+      />
+      @if (formLogin.get('password')?.invalid ) { @if
+      (password?.errors?.['required']) {
+      <span class="text-purple-500"> La contraseña es requerida.</span>
+      } } @if (password?.errors?.['minlength']) {
+      <span class="text-purple-500"> Debe tener 8 letras como minimo.</span>}
+    </div>
+
+    <button
+      type="submit"
+      [disabled]="!formLogin.valid"
+      class="text-white bg-purple-800 hover:bg-purple-700 rounded-md p-1 px-2 w-full"
+    >
+      Ingresar
+    </button>
+  </form>
+</div>

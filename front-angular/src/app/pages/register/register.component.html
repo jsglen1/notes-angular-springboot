@@ -1,0 +1,91 @@
+<div class="mt-10 flex items-center justify-center">
+  <form
+    [formGroup]="formRegister"
+    id="formRegister"
+    (ngSubmit)="onSubmit()"
+    class="flex flex-col items-center justify-center w-72 text-black space-y-4 p-5 rounded-md border-gray-600 border bg-gray-700"
+  >
+    <h1 class="text-xl text-slate-200">Registrate</h1>
+    <div class="flex flex-col w-full">
+      <label id="nameLabel" for="name" class="text-white">Nombre</label>
+      <input
+        id="name"
+        name="name"
+        formControlName="name"
+        type="text"
+        placeholder="nombre"
+        class="px-2 rounded-md border p-1"
+      />
+      @if (formRegister.get('name')?.invalid ) { @if
+      (name?.errors?.['required']) {
+      <span class="text-purple-500"> El nombre es requerido.</span>
+      } } @if (name?.errors?.['minlength']) {
+      <span class="text-purple-500"> Debe tener 4 letras como minimo.</span>}
+    </div>
+
+    <div class="flex flex-col w-full">
+      <label id="emailLabel" for="email" class="text-white">Correo</label>
+      <input
+        id="email"
+        name="email"
+        formControlName="email"
+        type="email"
+        placeholder="correo"
+        class="px-2 rounded-md border p-1"
+      />
+      @if (formRegister.get('email')?.invalid) { @if
+      (email?.errors?.['required']) {
+      <span class="text-purple-500"> El correo es requerido.</span>
+      } @if (email?.errors?.['email']) {
+      <span class="text-purple-500"> El correo no es valido.</span>
+      } }
+    </div>
+
+    <div class="flex flex-col w-full">
+      <label id="passwordLabel" for="name" class="text-white">Contraseña</label>
+      <input
+        id="password"
+        name="password"
+        formControlName="password"
+        type="password"
+        placeholder="contraseña"
+        class="px-2 rounded-md border p-1"
+      />
+      @if (formRegister.get('password')?.invalid ) { @if
+      (password?.errors?.['required']) {
+      <span class="text-purple-500"> La contraseña es requerida.</span>
+      } } @if (password?.errors?.['minlength']) {
+      <span class="text-purple-500"> Debe tener 8 letras como minimo.</span>}
+    </div>
+
+    <div class="flex flex-col w-full">
+      <label id="password_2Label" for="password_2" class="text-white"
+        >Confirmar Contraseña</label
+      >
+      <input
+        id="password_2"
+        name="password_2"
+        formControlName="password_2"
+        type="password"
+        placeholder="Confirmar Contraseña"
+        class="px-2 rounded-md border p-1"
+      />
+      @if (formRegister.get('password_2')?.invalid ) {
+      <span class="text-purple-500">
+        @if (password_2?.errors?.['required']) { La contraseña es requerida. }
+        @if (password_2?.errors?.['minlength']) { Debe tener 8 letras
+        comomínimo. } @if (formRegister.hasError('passwordsEquals',
+        'password_2')) { Las contraseñas no coinciden. }
+      </span>
+      }
+    </div>
+
+    <button
+      type="submit"
+      [disabled]="!formRegister.valid"
+      class="text-white bg-purple-800 hover:bg-purple-700 rounded-md p-1 px-2 w-full"
+    >
+      Registrar
+    </button>
+  </form>
+</div>

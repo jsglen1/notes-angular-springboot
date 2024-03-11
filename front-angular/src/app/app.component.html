@@ -1,0 +1,14 @@
+<app-header />
+@if (currentPath === '/') {
+<main
+  class="flex flex-col h-[80vh] items-center justify-center text-center px-10"
+>
+  <h1 class="text-xl md:text-3xl text-purple-800">
+    Aplicación de notas desarrollada con angular y tailwindcss para el Front,
+  </h1>
+  <p class="md:text-xl text-gray-500">
+    spring boot con java para el Backend, junto con base de datos MySql local
+  </p>
+</main>
+}
+<router-outlet />

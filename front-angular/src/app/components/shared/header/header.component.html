@@ -1,0 +1,40 @@
+<header>
+  <nav class="flex bg-purple-800 h-12 text-lg px-5">
+    <ul class="flex w-full text-white justify-between items-center">
+      @if (currentPath.includes('/authenticated')) {
+      <li>Bienvenido</li>
+      }@else {
+      <li><a routerLink="/">Bienvenido</a></li>
+      }
+      <div class="flex space-x-5 items-center">
+        @if (currentPath.includes('/authenticated')) {
+
+        <li>
+          <a routerLink="/authenticated/todo">
+            <img
+              src="assets/imgs/nota.png"
+              width="25"
+              height="20"
+              alt="nota"
+              class="hover:p-1"
+          /></a>
+        </li>
+
+        <li (click)="signOut()">
+          <img
+            src="assets/imgs/salir.png"
+            width="25"
+            height="20"
+            alt="usuario"
+            class="hover:p-1"
+          />
+        </li>
+        }@else{
+        <li><a routerLink="/login">Ingresar</a></li>
+        <li><a routerLink="/register">Registrarse</a></li>
+        }
+      </div>
+    </ul>
+  </nav>
+</header>
+<router-outlet />

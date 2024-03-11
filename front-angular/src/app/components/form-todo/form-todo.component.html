@@ -1,0 +1,63 @@
+<div class="flex items-center justify-center">
+  <form
+    [formGroup]="formTask"
+    id="formTask"
+    (ngSubmit)="onSubmit()"
+    class="flex flex-col items-center justify-center w-72 text-black space-y-4 p-5 rounded-md border-gray-600 border bg-gray-700"
+  >
+    <h1 class="text-xl text-slate-200">Formulario Tareas</h1>
+    <div class="flex flex-col w-full">
+      <label id="nameLabel" for="name" class="text-white">Nombre</label>
+      <input
+        id="name"
+        type="text"
+        name="name"
+        formControlName="name"
+        placeholder="nombre"
+        class="px-2 rounded-md border p-1"
+      />
+
+      @if (formTask.get('name')?.invalid ) { @if (name?.errors?.['required']) {
+      <span class="text-purple-500"> El nombre es requerido.</span>
+      } } @if (name?.errors?.['minlength']) {
+      <span class="text-purple-500"> Debe tener 4 letras como minimo.</span>}
+    </div>
+
+    <div class="flex flex-col w-full">
+      <label id="descriptionLabel" for="description" class="text-white"
+        >Description</label
+      >
+      <textarea
+        id="description"
+        type="description"
+        name="description"
+        formControlName="description"
+        placeholder="description"
+        class="px-2 rounded-md border p-1 h-20"
+        rows="4"
+      ></textarea>
+
+      @if (formTask.get('description')?.invalid ) { @if
+      (description?.errors?.['required']) {
+      <span class="text-purple-500"> La description es requerida.</span>
+      } } @if (description?.errors?.['minlength']) {
+      <span class="text-purple-500"> Debe tener 8 letras como minimo.</span>}
+    </div>
+
+    <div class="flex w-full space-x-3 text-white">
+      <button
+        type="submit"
+        class="w-full bg-purple-700 hover:bg-purple-600 rounded-md p-1 px-2"
+        [disabled]="!formTask.valid"
+      >
+        @if (create) { Crear} @if (update) {Actualizar}
+      </button>
+      <button
+        class="w-full bg-gray-900 hover:bg-gray-600 rounded-md p-1 px-2"
+        (click)="handleChange(false)"
+      >
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,67 @@
+<div class="flex items-center justify-center py-10">
+  <button
+    class="text-center items-center flex justify-center bg-purple-700 hover:bg-purple-600 p-1 rounded-md w-72"
+    (click)="handleStateFormCreate(true)"
+  >
+    Crear Nota
+  </button>
+</div>
+<div
+  class="flex mx-5 flex-wrap gap-5 md:gap-10 items-center justify-center px-5 pb-5"
+>
+  @for (item of listTask; track item.id) {
+  <div
+    class="flex flex-col space-y-2 w-72 h-60 rounded-md border border-purple-800 p-5 items-start bg-gray-500"
+  >
+    <div class="flex flex-col flex-1 w-full">
+      <p
+        class="text-center text-lg text-gray-800 font-bold overflow-hidden overflow-ellipsis"
+      >
+        {{ item.name }}
+      </p>
+      <textarea
+        class="text-black bg-gray-500 overflow-hidden overflow-ellipsis"
+        rows="4"
+        readonly
+        >{{ item.description }}
+      </textarea>
+    </div>
+    <div class="flex space-x-5 w-full">
+      <button
+        class="w-full bg-purple-700 hover:bg-purple-600 rounded-md p-1 px-2"
+        (click)="handleEditForm(item)"
+      >
+        Editar
+      </button>
+      <button
+        class="w-full bg-gray-700 hover:bg-gray-600 rounded-md p-1 px-2"
+        (click)="deleteTask(item.id)"
+      >
+        Eliminar
+      </button>
+    </div>
+  </div>
+  }
+</div>
+
+<!-- logica para el create form -->
+@if (stateFormCreate) {
+<div
+  class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50"
+>
+  <app-form-todo [create]="true" (closeForm)="handleStateFormCreate($event)" />
+</div>
+}
+
+<!-- logica para el update form -->
+@if (stateFormUpdate) {
+<div
+  class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50"
+>
+  <app-form-todo
+    [update]="true"
+    (closeForm)="handleStateFormUpdate($event)"
+    [task]="taskEditable"
+  />
+</div>
+}
